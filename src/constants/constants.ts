@@ -1,0 +1,12 @@
+export const SEARCH = "Search";
+export const INITIAL_DRINK = "margarita";
+export const NO_DRINKS_WERE_FOUND = "No Drinks Were Found";
+export const FILTER = "Filter";
+export const RANDOM_DRINK = "Random Drink";
+export const CATEGORY = "CATEGORY";
+export const DRINK = "DRINK";
+export const GLASS = "GLASS";
+export const IBA = "IBA";
+export const INSTRUCTIONS = "INSTRUCTIONS";
+export const DATE = "DATE";
+export const INGREDIENTS = "INGREDIENTS";

@@ -1,0 +1,8 @@
+.currentDrink {
+  background-color: #328bff;
+  border-radius: 1rem;
+  color: white;
+}
+.listWrapper {
+  min-height: 32rem;
+}
