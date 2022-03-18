@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { Filter, Item } from "../../Utils/Utils";
+import { Filter, Item, Sort } from "../../Utils/Utils";
 import { RootStore } from "../../store/store";
 import DrinksSearch from "./../DrinksSearch/DrinksSearch";
 import DrinksDetails from "../DrinksDetails/DrinksDetails";
@@ -39,7 +39,7 @@ class DrinksPage extends Component<DrinksPageProps> {
 
   handleSorting = () => {
     let sortedDrinks =
-      this.props.sortingOrder === "ASC"
+      this.props.sortingOrder === Sort.ASCENDING
         ? this.props.drinks.sort(sortDrinksAscendingOrder)
         : this.props.drinks.sort(sortDrinksDescendingOrder);
     this.props.actions.setSortedDrinks(sortedDrinks);

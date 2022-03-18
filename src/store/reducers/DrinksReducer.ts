@@ -1,3 +1,4 @@
+import { Sort } from "../../Utils/Utils";
 import { Action } from "../actions/Actions";
 import * as ActionType from "../actions/ActionTypes";
 import { INITIAL_DRINK } from "./../../constants/constants";
@@ -31,7 +32,7 @@ export const initialState: IDrinksState = {
   searchedDrink: INITIAL_DRINK,
   randomDrink: {},
   currentDrink: {},
-  sortingOrder: "DESC",
+  sortingOrder: Sort.DESCENDING,
 };
 
 const DrinksReducer = (
@@ -64,7 +65,7 @@ const DrinksReducer = (
     case ActionType.SET_SORTING_ORDER:
       return {
         ...state,
-        sortingOrder: state.sortingOrder === "ASC" ? "DESC" : "ASC",
+        sortingOrder: state.sortingOrder === Sort.ASCENDING ? Sort.DESCENDING : Sort.ASCENDING,
       };
     default:
       return state;
