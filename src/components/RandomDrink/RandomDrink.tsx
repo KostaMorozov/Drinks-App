@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import styles from "./RandomDrink.module.css";
 import { RootStore } from "./../../store/store";
 import * as actionCreators from "../../store/actions/ActionCreators";
 import { RANDOM_DRINK } from "../../constants/constants";
@@ -22,14 +21,18 @@ const RandomDrink = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} className="d-flex justify-content-center">
-          <h2>{RANDOM_DRINK}</h2>
+      <Grid
+        container
+        spacing={1}
+        className="d-flex justify-content-center randomBg"
+      >
+        <Grid item xs={12} className="d-flex justify-content-center randomBg">
+          <h2 className="title">{RANDOM_DRINK}</h2>
         </Grid>
-        <Grid item xs={12} className="d-flex justify-content-center">
+        <Grid item xs={12} className="d-flex justify-content-center randomBg">
           <img
             src={randomDrink.strDrinkThumb + "/preview"}
-            className={styles.img}
+            className="randomImg"
             alt=""
           />
         </Grid>

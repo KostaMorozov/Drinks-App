@@ -42,3 +42,9 @@ export const setSortedDrinks = (drinks: IDrink[]) => {
 export const setFilteredDrinks = (drinks: IDrink[]) => {
   return { type: ActionType.SET_DRINKS, payload: drinks };
 };
+export const setFilterInput = (input: string) => {
+  return { type: ActionType.SET_FILTER_INPUT, payload: input };
+};
+export const setFilterBy = (filter: string) => {
+  return { type: ActionType.SET_FILTER_BY, payload: filter };
+};

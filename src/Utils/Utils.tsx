@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { IDrink } from "../store/reducers/DrinksReducer";
+import { STR_INGREDIENTS } from "../constants/constants";
 
 export enum Filter {
   GLASS = "Glass",
@@ -12,6 +13,8 @@ export enum Sort {
   ASCENDING = "ASC",
   DESCENDING = "DESC",
 }
+
+type FilterDrinkBy = "strCategory" | "strGlass";
 
 export const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -45,40 +48,48 @@ export const sortDrinksDescendingOrder = (a: IDrink, b: IDrink) => {
   return 0;
 };
 
-export const filterDrinks = (
-  filter: Filter,
+export const getIngredients = (drink: IDrink): string[] => {
+  let ingredients: string[] = [];
+  let tempIngredients = Object.entries(drink);
+  tempIngredients.map(
+    (ing) =>
+      ing[0].includes(STR_INGREDIENTS) && ing[1] && ingredients.push(ing[1])
+  );
+  return ingredients;
+};
+
+const filteredDrinksBy = (
   drinks: IDrink[],
-  filteredDrink: string
+  filterBy: FilterDrinkBy,
+  filterInput: string
 ) => {
   let filteredDrinks: IDrink[] = [];
-  switch (filter) {
-    case Filter.CATEGORY: {
-      for (let drink of drinks) {
-        if (drink.strCategory?.includes(filteredDrink))
-          filteredDrinks.push(drink);
-      }
+  drinks.map(
+    (drink) =>
+      drink[filterBy]?.includes(filterInput) && filteredDrinks.push(drink)
+  );
+  return filteredDrinks;
+};
 
-      return filteredDrinks;
+export const filterDrinks = (
+  filterBy: Filter,
+  drinks: IDrink[],
+  filterInput: string
+) => {
+  let filteredDrinks: IDrink[] = [];
+  switch (filterBy) {
+    case Filter.CATEGORY: {
+      return filteredDrinksBy(drinks, "strCategory", filterInput);
     }
     case Filter.GLASS: {
-      for (let drink of drinks) {
-        if (drink.strGlass?.includes(filteredDrink)) filteredDrinks.push(drink);
-      }
-
-      return filteredDrinks;
+      return filteredDrinksBy(drinks, "strGlass", filterInput);
     }
     case Filter.INGREDIENT: {
-      for (let drink of drinks) {
-        if (
-          drink.strIngredient1?.includes(filteredDrink) ||
-          drink.strIngredient2?.includes(filteredDrink) ||
-          drink.strIngredient3?.includes(filteredDrink) ||
-          drink.strIngredient4?.includes(filteredDrink) ||
-          drink.strIngredient5?.includes(filteredDrink)
+      drinks.map((drink) =>
+        getIngredients(drink).map(
+          (ingr) => ingr.includes(filterInput) && filteredDrinks.push(drink)
         )
-          filteredDrinks.push(drink);
-      }
-
+      );
       return filteredDrinks;
     }
     default:

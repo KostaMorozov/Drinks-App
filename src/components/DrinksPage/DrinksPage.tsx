@@ -16,87 +16,102 @@ import {
   sortDrinksDescendingOrder,
   filterDrinks,
 } from "./../../Utils/Utils";
-
-type DrinksPageProps = LinkDispatchProps & LinkStateProps;
-
-class DrinksPage extends Component<DrinksPageProps> {
-  state = {
-    drinks: [],
-  };
-
-  handleFilter = (filterBy: Filter, filteredDrink: string) => {
-    const filteredDrinks = filterDrinks(
-      filterBy as Filter,
-      this.props.drinks,
-      filteredDrink
-    );
-    this.props.actions.setFilteredDrinks(filteredDrinks);
-    this.props.actions.setCurrentDrink("");
-    this.setState((prevState) => {
-      return { ...prevState, drinks: filteredDrinks };
-    });
-  };
-
-  handleSorting = () => {
-    let sortedDrinks =
-      this.props.sortingOrder === Sort.ASCENDING
-        ? this.props.drinks.sort(sortDrinksAscendingOrder)
-        : this.props.drinks.sort(sortDrinksDescendingOrder);
-    this.props.actions.setSortedDrinks(sortedDrinks);
-    this.props.actions.setSortingOrder(this.props.sortingOrder);
-    this.setState((prevState) => {
-      return { ...prevState, drinks: sortedDrinks };
-    });
-  };
-
-  render() {
-    const { actions, drinks, searchedDrink, sortingOrder, currentDrink } =
-      this.props;
-
-    return (
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2} className="d-flex justify-content-center">
-          <Grid item xs={4}>
-            <DrinksSearch actions={actions} />
-          </Grid>
-        </Grid>
-        <Grid container spacing={2} className="mb-2 px-2">
-          <Grid item xs={4}>
-            <Item>
-              <DrinksFilter drinks={drinks} onFilter={this.handleFilter} />
-            </Item>
-          </Grid>
-        </Grid>
-        <Grid>
-          <DrinksDetails
-            actions={actions}
-            drinks={drinks}
-            currentDrink={currentDrink ?? {}}
-            searchedDrink={searchedDrink}
-            sortingOrder={sortingOrder}
-            onSort={this.handleSorting}
-          />
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Item>
-              <RandomDrink />
-            </Item>
-          </Grid>
-        </Grid>
-      </Box>
-    );
-  }
-}
+import PageHeader from "./PageHeader/PageHeader";
+import styles from "./DrinksPage.module.css";
+import NoDrinksFounded from "../NoDrinksFounded/NoDrinksFounded";
 
 interface LinkStateProps {
   drinks: IDrink[];
   sortingOrder: string;
   searchedDrink: string;
   currentDrink?: IDrink;
+  filterInput?: string;
+  filterBy?: string;
 }
 interface LinkDispatchProps {
   actions: typeof actionCreators;
+}
+
+type DrinksPageProps = LinkDispatchProps & LinkStateProps;
+
+class DrinksPage extends Component<DrinksPageProps> {
+  handleFilter = () => {
+    const currentDrinks = [...this.props.drinks];
+    const filteredDrinks = filterDrinks(
+      this.props.filterBy as Filter,
+      currentDrinks,
+      this.props.filterInput ?? ""
+    );
+    this.props.actions.setFilteredDrinks(filteredDrinks);
+    this.props.actions.setCurrentDrink("");
+  };
+
+  handleSorting = () => {
+    let sortedDrinks = [...this.props.drinks];
+    this.props.sortingOrder === Sort.ASCENDING
+      ? sortedDrinks.sort(sortDrinksAscendingOrder)
+      : sortedDrinks.sort(sortDrinksDescendingOrder);
+    this.props.actions.setSortedDrinks(sortedDrinks);
+    this.props.actions.setSortingOrder(this.props.sortingOrder);
+  };
+
+  render() {
+    const {
+      actions,
+      drinks,
+      searchedDrink,
+      sortingOrder,
+      currentDrink,
+      filterBy,
+      filterInput,
+    } = this.props;
+
+    return (
+      <>
+        <PageHeader />
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={2} item xs={12} className="mt-3 mb-2">
+            <Item
+              className={`${styles.searchFilterWrapper} d-flex align-items-center justify-content-center`}
+            >
+              <Grid xs={3.5}>
+                <DrinksFilter
+                  drinks={drinks}
+                  onFilter={this.handleFilter}
+                  actions={actions}
+                  filterBy={filterBy ?? ""}
+                  filterInput={filterInput ?? ""}
+                />
+              </Grid>
+              &nbsp;&nbsp;
+              <div className={styles.divider}></div>
+              <Grid xs={8.5}>
+                <DrinksSearch actions={actions} />
+              </Grid>
+            </Item>
+          </Grid>
+          <Grid>
+            <DrinksDetails
+              actions={actions}
+              drinks={drinks}
+              currentDrink={currentDrink ?? {}}
+              searchedDrink={searchedDrink}
+              sortingOrder={sortingOrder}
+              onSort={this.handleSorting}
+            />
+          </Grid>
+
+          <Grid container className="mt-1">
+            <Grid item xs={12}>
+              <Item>
+                <RandomDrink />
+              </Item>
+            </Grid>
+          </Grid>
+        </Box>
+      </>
+    );
+  }
 }
 
 const mapStateToProps = (state: RootStore) => {
@@ -106,6 +121,8 @@ const mapStateToProps = (state: RootStore) => {
     searchedDrink: state.cocktails.searchedDrink,
     sortingOrder: state.cocktails.sortingOrder,
     filteredDrinks: [],
+    filterInput: state.cocktails.filterInput,
+    filterBy: state.cocktails.filterBy,
   };
 };
 

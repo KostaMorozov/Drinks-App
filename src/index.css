@@ -1,0 +1,47 @@
+html,
+body,
+#root,
+.randomBg {
+  background-color: rgba(132, 247, 255, 0.062);
+}
+.title {
+  font-weight: lighter;
+  font-style: oblique;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(2, 166, 172);
+}
+.itemsWrapper {
+  border: 1px solid rgba(0, 82, 71, 0.233);
+}
+.label {
+  font-size: 1.2rem;
+  font-weight: lighter;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: darkblue;
+}
+.labelContext {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: lighter;
+  margin: auto 0.5rem;
+  color: rgba(31, 0, 145, 0.445);
+}
+.img {
+  height: 28.2rem;
+  border-radius: 8px;
+}
+.randomImg {
+  height: 25.5rem;
+  border-radius: 8px;
+}
+::-webkit-scrollbar {
+  width: 0.6rem;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(0, 96, 134);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(8, 185, 255);
+  border-radius: 10px;
+}

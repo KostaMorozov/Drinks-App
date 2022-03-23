@@ -12,6 +12,7 @@ import {
 } from "../../../constants/constants";
 import styles from "./DrinkDetails.module.css";
 import { IDrink } from "./../../../store/reducers/DrinksReducer";
+import DetailsRow from "../DetailsRow/DetailsRow";
 
 type DrinkDetailsProps = {
   currentDrink: IDrink;
@@ -19,50 +20,34 @@ type DrinkDetailsProps = {
 
 function DrinkDetails({ currentDrink }: DrinkDetailsProps) {
   return currentDrink.idDrink ? (
-    <Item>
+
       <Box sx={{ flexGrow: 1 }} className={styles.detailsWrapper}>
         <Grid container spacing={2} className={styles.drinkDetails}>
           <Grid item xs={12}>
             {currentDrink.strDrink && (
-              <Grid item xs={12} className="d-flex justify-content-start my-4">
-                <b className="font-weight-bold">{DRINK}:</b> &nbsp;
-                <h6>{currentDrink.strDrink}</h6>
-              </Grid>
+              <DetailsRow label={DRINK} content={currentDrink.strDrink} />
             )}
             {currentDrink.strCategory && (
-              <Grid item xs={12} className="d-flex justify-content-start my-4">
-                <b>{CATEGORY}:</b>&nbsp;
-                <h6>{currentDrink.strCategory}</h6>
-              </Grid>
+              <DetailsRow label={CATEGORY} content={currentDrink.strCategory} />
             )}
             {currentDrink.strGlass && (
-              <Grid item xs={12} className="d-flex justify-content-start my-4">
-                <b> {GLASS}:</b>&nbsp;
-                <h6>{currentDrink.strGlass}</h6>
-              </Grid>
+              <DetailsRow label={GLASS} content={currentDrink.strGlass} />
             )}
             {currentDrink.strIBA && (
-              <Grid item xs={12} className="d-flex justify-content-start my-4">
-                <b> {IBA}:</b>&nbsp;
-                <h6>{currentDrink.strIBA}</h6>
-              </Grid>
+              <DetailsRow label={IBA} content={currentDrink.strIBA} />
             )}
             {currentDrink.strInstructions && (
-              <Grid item xs={12} className="d-flex justify-content-start my-4">
-                <b>{INSTRUCTIONS}:</b>&nbsp;
-                <h6>{currentDrink.strInstructions}</h6>
-              </Grid>
+              <DetailsRow
+                label={INSTRUCTIONS}
+                content={currentDrink.strInstructions}
+              />
             )}
             {currentDrink.dateModified && (
-              <Grid item xs={12} className="d-flex justify-content-start my-4">
-                <b>{DATE}:</b>&nbsp;
-                <h6>{currentDrink.dateModified}</h6>
-              </Grid>
+              <DetailsRow label={DATE} content={currentDrink.dateModified} />
             )}
           </Grid>
         </Grid>
       </Box>
-    </Item>
   ) : null;
 }
 

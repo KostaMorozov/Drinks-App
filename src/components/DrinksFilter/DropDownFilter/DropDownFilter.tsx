@@ -7,6 +7,7 @@ import Select from "@mui/material/Select";
 import { FILTER } from "../../../constants/constants";
 import { Filter } from "../../../Utils/Utils";
 import { IDrink } from "../../../store/reducers/DrinksReducer";
+import styles from "./DropDownFilter.module.css";
 
 type DropDownFilterProps = {
   onFilterBy: (event: any) => void;
@@ -20,8 +21,8 @@ const DropDownFilter = ({
   drinks,
 }: DropDownFilterProps) => {
   return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth disabled={!drinks?.length}>
+    <Box >
+      <FormControl className={styles.filterDropDown}>
         <InputLabel>{FILTER}</InputLabel>
         <Select value={filterValue} onChange={(event) => onFilterBy(event)}>
           <MenuItem value={Filter.GLASS}>{Filter.GLASS}</MenuItem>

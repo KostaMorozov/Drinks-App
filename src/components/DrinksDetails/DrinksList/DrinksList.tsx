@@ -3,13 +3,10 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import Grid from "@mui/material/Grid";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import * as actionCreators from "../../../store/actions/ActionCreators";
 import { IDrink } from "./../../../store/reducers/DrinksReducer";
-import {
-  INITIAL_DRINK,
-  NO_DRINKS_WERE_FOUND,
-} from "./../../../constants/constants";
 import styles from "./DrinksList.module.css";
 import SortDrinks from "../SortDrinks/SortDrinks";
 
@@ -30,11 +27,7 @@ const DrinksList = ({
   sortingOrder,
   onSort,
 }: DrinksListProps) => {
-  const { setDrinks, setCurrentDrink } = actions;
-
-  useEffect(() => {
-    setDrinks(INITIAL_DRINK); // eslint-disable-next-line
-  }, []);
+  const { setCurrentDrink } = actions;
 
   const handleCurrentDrink = (id: string) => {
     setCurrentDrink(id);
@@ -42,20 +35,25 @@ const DrinksList = ({
 
   return drinks && drinks.length !== 0 ? (
     <Box sx={{ flexGrow: 1 }} className={styles.listWrapper}>
-      <SortDrinks onSort={onSort} searchedDrink={searchedDrink} />
+      <SortDrinks
+        onSort={onSort}
+        searchedDrink={searchedDrink}
+        sortingOrder={sortingOrder}
+      />
       <List
         sx={{
           width: "100%",
-          maxWidth: 360,
           bgcolor: "background.paper",
           cursor: "pointer",
+          height: "29rem",
+          overflow: "scroll",
         }}
       >
         {drinks.map((drink) => (
           <ListItem
             key={drink.idDrink}
             onClick={() => handleCurrentDrink(drink.idDrink ?? "")}
-            className={` ${
+            className={`label ${
               currentDrink!.idDrink === drink.idDrink && styles.currentDrink
             }`}
           >
@@ -65,9 +63,7 @@ const DrinksList = ({
         ))}
       </List>
     </Box>
-  ) : (
-    <div>{NO_DRINKS_WERE_FOUND}</div>
-  );
+  ) : null;
 };
 
 export default DrinksList;

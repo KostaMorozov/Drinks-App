@@ -15,12 +15,11 @@ const InputFilter = ({
 }: InputFilterProps) => {
   return (
     <TextField
-      id="outlined-basic"
+    className="w-75"
       value={filterSearch}
       onChange={(event) => onSearchByFilter(event)}
       label={SEARCH}
       disabled={filterValue.length === 0}
-      variant="outlined"
     />
   );
 };

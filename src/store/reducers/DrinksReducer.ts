@@ -1,7 +1,6 @@
 import { Sort } from "../../Utils/Utils";
 import { Action } from "../actions/Actions";
 import * as ActionType from "../actions/ActionTypes";
-import { INITIAL_DRINK } from "./../../constants/constants";
 
 export interface IDrink {
   dateModified?: string;
@@ -12,11 +11,6 @@ export interface IDrink {
   strIBA?: string;
   strInstructions?: string;
   strDrinkThumb?: string;
-  strIngredient1?: string;
-  strIngredient2?: string;
-  strIngredient3?: string;
-  strIngredient4?: string;
-  strIngredient5?: string;
 }
 
 export interface IDrinksState {
@@ -25,14 +19,18 @@ export interface IDrinksState {
   randomDrink: IDrink;
   currentDrink: IDrink;
   sortingOrder: string;
+  filterInput?: string;
+  filterBy?: string;
 }
 
 export const initialState: IDrinksState = {
   drinks: [],
-  searchedDrink: INITIAL_DRINK,
+  searchedDrink: "",
   randomDrink: {},
   currentDrink: {},
   sortingOrder: Sort.DESCENDING,
+  filterInput: "",
+  filterBy: "",
 };
 
 const DrinksReducer = (
@@ -65,7 +63,20 @@ const DrinksReducer = (
     case ActionType.SET_SORTING_ORDER:
       return {
         ...state,
-        sortingOrder: state.sortingOrder === Sort.ASCENDING ? Sort.DESCENDING : Sort.ASCENDING,
+        sortingOrder:
+          state.sortingOrder === Sort.ASCENDING
+            ? Sort.DESCENDING
+            : Sort.ASCENDING,
+      };
+    case ActionType.SET_FILTER_INPUT:
+      return {
+        ...state,
+        filterInput: action.payload,
+      };
+    case ActionType.SET_FILTER_BY:
+      return {
+        ...state,
+        filterBy: action.payload,
       };
     default:
       return state;

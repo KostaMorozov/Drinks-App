@@ -4,6 +4,8 @@ import {
   SET_RANDOM_DRINK,
   SET_CURRENT_DRINK,
   SET_SORTING_ORDER,
+  SET_FILTER_INPUT,
+  SET_FILTER_BY,
 } from "./ActionTypes";
 import { IDrink } from "./../reducers/DrinksReducer";
 
@@ -27,10 +29,20 @@ interface SetSortingOrder {
   type: typeof SET_SORTING_ORDER;
   payload: "";
 }
+interface SetFilterInput {
+  type: typeof SET_FILTER_INPUT;
+  payload: "";
+}
+interface SetFilterBy {
+  type: typeof SET_FILTER_BY;
+  payload: "";
+}
 
 export type Action =
   | SetDrinks
   | SetSearchedDrink
   | SetRandomDrink
   | SetCurrentDrink
-  | SetSortingOrder;
+  | SetSortingOrder
+  | SetFilterInput
+  | SetFilterBy;

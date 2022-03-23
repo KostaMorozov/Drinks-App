@@ -1,0 +1,9 @@
+.wrapper {
+  background-color: rgba(255, 0, 0, 0.733) !important;
+  color: white !important;
+  height: 3rem !important;
+  width: 30rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: bold !important;
+}
