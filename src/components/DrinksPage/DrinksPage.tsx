@@ -18,7 +18,6 @@ import {
 } from "./../../Utils/Utils";
 import PageHeader from "./PageHeader/PageHeader";
 import styles from "./DrinksPage.module.css";
-import NoDrinksFounded from "../NoDrinksFounded/NoDrinksFounded";
 
 interface LinkStateProps {
   drinks: IDrink[];
