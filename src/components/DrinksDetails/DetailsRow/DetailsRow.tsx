@@ -7,12 +7,12 @@ type DetailsRowProps = {
 };
 
 const DetailsRow = ({ label, content }: DetailsRowProps) => {
-  return (
+  return content ? (
     <Grid item xs={12} className="d-flex justify-content-start my-4">
       <b className="label">{label}:</b> &nbsp;
       <h6 className="labelContext">{content}</h6>
     </Grid>
-  );
+  ) : null;
 };
 
 export default DetailsRow;

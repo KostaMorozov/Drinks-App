@@ -31,7 +31,6 @@ const DrinksSearch = ({ actions }: DrinksSearchProps) => {
     setDrinks(drinkToSearch);
     setSearchedDrink(drinkToSearch);
     setCurrentDrink("");
-    setDrinkToSearch("");
     setFilterBy("");
     setFilterInput("");
   };
@@ -40,9 +39,13 @@ const DrinksSearch = ({ actions }: DrinksSearchProps) => {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2} item xs={12} className="m-0 ">
         <Grid item xs={12} className="d-flex justify-content-center">
-          <SearchHeader/>
+          <SearchHeader />
         </Grid>
-        <Grid item xs={12} className="d-flex align-items-center justify-content-center mt-2">
+        <Grid
+          item
+          xs={12}
+          className="d-flex align-items-center justify-content-center mt-2"
+        >
           <TextField
             className="w-75"
             value={drinkToSearch}

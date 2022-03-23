@@ -28,6 +28,7 @@ interface LinkStateProps {
   filterInput?: string;
   filterBy?: string;
 }
+
 interface LinkDispatchProps {
   actions: typeof actionCreators;
 }

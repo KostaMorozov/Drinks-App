@@ -20,34 +20,21 @@ type DrinkDetailsProps = {
 
 function DrinkDetails({ currentDrink }: DrinkDetailsProps) {
   return currentDrink.idDrink ? (
-
-      <Box sx={{ flexGrow: 1 }} className={styles.detailsWrapper}>
-        <Grid container spacing={2} className={styles.drinkDetails}>
-          <Grid item xs={12}>
-            {currentDrink.strDrink && (
-              <DetailsRow label={DRINK} content={currentDrink.strDrink} />
-            )}
-            {currentDrink.strCategory && (
-              <DetailsRow label={CATEGORY} content={currentDrink.strCategory} />
-            )}
-            {currentDrink.strGlass && (
-              <DetailsRow label={GLASS} content={currentDrink.strGlass} />
-            )}
-            {currentDrink.strIBA && (
-              <DetailsRow label={IBA} content={currentDrink.strIBA} />
-            )}
-            {currentDrink.strInstructions && (
-              <DetailsRow
-                label={INSTRUCTIONS}
-                content={currentDrink.strInstructions}
-              />
-            )}
-            {currentDrink.dateModified && (
-              <DetailsRow label={DATE} content={currentDrink.dateModified} />
-            )}
-          </Grid>
+    <Box sx={{ flexGrow: 1 }} className={styles.detailsWrapper}>
+      <Grid container spacing={2} className={styles.drinkDetails}>
+        <Grid item xs={12}>
+          <DetailsRow label={DRINK} content={currentDrink.strDrink} />
+          <DetailsRow label={CATEGORY} content={currentDrink.strCategory} />
+          <DetailsRow label={GLASS} content={currentDrink.strGlass} />
+          <DetailsRow label={IBA} content={currentDrink.strIBA} />
+          <DetailsRow
+            label={INSTRUCTIONS}
+            content={currentDrink.strInstructions}
+          />
+          <DetailsRow label={DATE} content={currentDrink.dateModified} />
         </Grid>
-      </Box>
+      </Grid>
+    </Box>
   ) : null;
 }
 
